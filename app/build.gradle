@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -49,7 +52,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:$navigation_ui"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_ui"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_ui"
-    implementation "com.jakewharton.rxbinding4:rxbinding:$rxbinding"
+//    implementation "com.jakewharton.rxbinding4:rxbinding:$rxbinding"
     implementation "androidx.recyclerview:recyclerview:$recycler_view"
 
     // Coroutine
