@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.natashaval.moodify.databinding.ActivityMainBinding
+import com.natashaval.moodify.util.ViewUtils.setSafeClickListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     navView.setupWithNavController(navController)
 
     with(binding) {
-      fab.setOnClickListener {
+      fab.setSafeClickListener {
 
       }
     }

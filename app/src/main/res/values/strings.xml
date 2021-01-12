@@ -6,4 +6,8 @@
     <string name="title_profile">Profile</string>
     <string name="title_mood">Add</string>
     <string name="title_more">More</string>
+
+    <string name="feel_title">How do you feel?</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
 </resources>

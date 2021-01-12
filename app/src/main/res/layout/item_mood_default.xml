@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_mood_joy"
+        android:layout_width="@dimen/mood_icon_size"
+        android:layout_height="@dimen/mood_icon_size"
+        android:src="@drawable/ic_joy"
+        app:layout_constraintEnd_toStartOf="@id/iv_mood_happy"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_mood_happy"
+        android:layout_width="@dimen/mood_icon_size"
+        android:layout_height="@dimen/mood_icon_size"
+        android:src="@drawable/ic_happy"
+        app:layout_constraintBottom_toBottomOf="@id/iv_mood_joy"
+        app:layout_constraintEnd_toStartOf="@id/iv_mood_neutral"
+        app:layout_constraintStart_toEndOf="@id/iv_mood_joy"
+        app:layout_constraintTop_toTopOf="@id/iv_mood_joy" />
+
+    <ImageView
+        android:id="@+id/iv_mood_neutral"
+        android:layout_width="@dimen/mood_icon_size"
+        android:layout_height="@dimen/mood_icon_size"
+        android:src="@drawable/ic_neutral"
+        app:layout_constraintBottom_toBottomOf="@id/iv_mood_joy"
+        app:layout_constraintEnd_toStartOf="@id/iv_mood_sad"
+        app:layout_constraintStart_toEndOf="@id/iv_mood_happy"
+        app:layout_constraintTop_toTopOf="@id/iv_mood_joy" />
+
+    <ImageView
+        android:id="@+id/iv_mood_sad"
+        android:layout_width="@dimen/mood_icon_size"
+        android:layout_height="@dimen/mood_icon_size"
+        android:src="@drawable/ic_sad"
+        app:layout_constraintBottom_toBottomOf="@id/iv_mood_joy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_mood_neutral"
+        app:layout_constraintTop_toTopOf="@id/iv_mood_joy" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

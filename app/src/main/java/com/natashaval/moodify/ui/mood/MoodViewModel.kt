@@ -1,10 +1,10 @@
-package com.natashaval.moodify.ui.notifications
+package com.natashaval.moodify.ui.mood
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class MoodViewModel : ViewModel() {
 
   private val _text = MutableLiveData<String>().apply {
     value = "This is notifications Fragment"

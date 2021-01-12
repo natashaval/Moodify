@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.natashaval.moodify.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_mood"
+            app:destination="@id/navigation_mood" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -19,7 +23,7 @@
 
     <fragment
         android:id="@+id/navigation_mood"
-        android:name="com.natashaval.moodify.ui.notifications.NotificationsFragment"
+        android:name="com.natashaval.moodify.ui.mood.MoodFragment"
         android:label="@string/title_mood"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_mood" />
 </navigation>

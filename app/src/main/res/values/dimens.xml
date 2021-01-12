@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="dimen_0dp">0dp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="margin_12">12dp</dimen>
@@ -11,4 +12,6 @@
     <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_48">48dp</dimen>
     <dimen name="margin_64">64dp</dimen>
+
+    <dimen name="mood_icon_size">80dp</dimen>
 </resources>
