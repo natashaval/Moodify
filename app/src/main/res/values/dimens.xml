@@ -14,4 +14,7 @@
     <dimen name="margin_64">64dp</dimen>
 
     <dimen name="mood_icon_size">72dp</dimen>
+
+<!--    Text Size-->
+    <dimen name="mood_title">32sp</dimen>
 </resources>

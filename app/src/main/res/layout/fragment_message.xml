@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mood.MoodFragment">
+    tools:context=".ui.mood.MessageFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_date"
@@ -14,8 +14,9 @@
         android:layout_marginVertical="@dimen/margin_8"
         android:layout_marginStart="@dimen/margin_16"
         android:layout_marginEnd="@dimen/margin_8"
+        android:enabled="false"
         android:hint="@string/date"
-        app:layout_constraintBottom_toTopOf="@id/tv_title"
+        app:layout_constraintBottom_toTopOf="@id/tv_message_title"
         app:layout_constraintEnd_toStartOf="@id/et_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8"
         android:layout_marginEnd="@dimen/margin_16"
+        android:enabled="false"
         android:hint="@string/time"
         app:layout_constraintBottom_toBottomOf="@id/et_date"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,37 +50,59 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_message_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16"
         android:fontFamily="@font/lato_regular"
-        android:text="@string/feel_title"
+        android:text="@string/message_title"
         android:textAlignment="center"
         android:textSize="@dimen/mood_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_date" />
 
-    <include
-        android:id="@+id/item_mood"
-        android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="wrap_content"
-        layout="@layout/item_mood_default"
+    <ImageView
+        android:id="@+id/iv_mood_today"
+        android:layout_width="@dimen/mood_icon_size"
+        android:layout_height="@dimen/mood_icon_size"
+        android:src="@drawable/ic_joy_filled"
         android:layout_marginTop="@dimen/margin_24"
-        android:layout_marginHorizontal="@dimen/margin_8"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_message_title"
+        app:layout_constraintStart_toStartOf="@id/tv_message_title"
+        app:layout_constraintEnd_toEndOf="@id/tv_message_title" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_message"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_marginHorizontal="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginBottom="@dimen/margin_32"
+        app:helperTextEnabled="true"
+        app:helperText="@string/message_helper"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/iv_mood_today"
+        app:layout_constraintBottom_toTopOf="@id/fab_finish">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:textSize="20sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_next"
+        android:id="@+id/fab_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_32"
         app:backgroundTint="@color/colorAccent"
-        android:src="@drawable/ic_arrow_right"
+        android:src="@drawable/ic_check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
