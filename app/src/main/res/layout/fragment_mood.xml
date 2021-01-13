@@ -7,7 +7,7 @@
     tools:context=".ui.mood.MoodFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_date"
+        android:id="@+id/tl_date"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
@@ -16,36 +16,53 @@
         android:layout_marginEnd="@dimen/margin_8"
         android:hint="@string/date"
         app:layout_constraintBottom_toTopOf="@id/tv_title"
-        app:layout_constraintEnd_toStartOf="@id/et_time"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_calendar">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textIsSelectable="false"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/et_time"
+        android:id="@+id/tl_time"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_8"
         android:layout_marginEnd="@dimen/margin_16"
         android:hint="@string/time"
-        app:layout_constraintBottom_toBottomOf="@id/et_date"
+        app:layout_constraintBottom_toBottomOf="@id/tl_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/et_date"
-        app:layout_constraintTop_toTopOf="@id/et_date"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/tl_date"
         app:startIconDrawable="@drawable/ic_time">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textIsSelectable="false"
             android:inputType="time" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -58,14 +75,14 @@
         android:textSize="@dimen/mood_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_date" />
+        app:layout_constraintTop_toBottomOf="@id/tl_date" />
 
     <include
         android:id="@+id/item_mood"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         layout="@layout/item_mood_default"
-        android:layout_marginTop="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_16"
         android:layout_marginHorizontal="@dimen/margin_8"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintStart_toStartOf="parent"

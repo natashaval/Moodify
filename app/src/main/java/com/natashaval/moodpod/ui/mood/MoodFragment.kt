@@ -7,24 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMoodBinding
 import com.natashaval.moodpod.util.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DateFormat
+import java.util.*
 
-@AndroidEntryPoint
-class MoodFragment : Fragment() {
+@AndroidEntryPoint class MoodFragment : Fragment() {
 
   private var _binding: FragmentMoodBinding? = null
   private val binding get() = _binding!!
   private lateinit var moodViewModel: MoodViewModel
-  private var moodMap = mapOf<Int, Boolean>(
-    MOOD_JOY to false,
-    MOOD_HAPPY to false,
-    MOOD_NEUTRAL to false,
-    MOOD_SAD to false
-  ).withDefault { false }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
@@ -41,9 +39,31 @@ class MoodFragment : Fragment() {
       val action = MoodFragmentDirections.actionNavigationMoodToMessageFragment()
       findNavController().navigate(action)
     }
+    val calendar = Calendar.getInstance()
+    binding.etDate.setSafeClickListener {
+      val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
+          .setSelection(calendar.timeInMillis)
+      val datePicker = datePickerBuilder.build()
+      datePicker.addOnPositiveButtonClickListener {
+        binding.etDate.setText(DateFormat.getDateInstance().format(it))
+      }
+      datePicker.show(childFragmentManager, "MaterialDatePicker")
+    }
+
+    binding.etTime.setSafeClickListener {
+      val timePickerBuilder = MaterialTimePicker.Builder()
+          .setTimeFormat(TimeFormat.CLOCK_24H)
+          .setHour(calendar.get(Calendar.HOUR_OF_DAY))
+          .setMinute(Calendar.MINUTE)
+      val timePicker = timePickerBuilder.build()
+      timePicker.addOnPositiveButtonClickListener {
+        binding.etTime.setText(getString(R.string.time_detail, timePicker.hour, timePicker.minute))
+      }
+      timePicker.show(childFragmentManager, "MaterialTimePicker")
+    }
 
     moodViewModel.text.observe(viewLifecycleOwner, {
-      binding.tvTitle.text = it
+
     })
   }
 

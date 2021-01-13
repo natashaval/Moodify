@@ -9,6 +9,7 @@
 
     <string name="feel_title">How do you feel?</string>
     <string name="time">Time</string>
+    <string name="time_detail">%1$02d : %2$02d</string>
     <string name="date">Date</string>
     <string name="message_title">What\'s your story?</string>
     <string name="message_helper">120/120 characters</string>
