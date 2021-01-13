@@ -1,4 +1,4 @@
-# Moodify
+# MoodPod
 
 ## Features:
 1. Track daily mood

@@ -7,23 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.natashaval.moodify.ui.home.HomeFragment"
+        android:name="com.natashaval.moodpod.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_navigation_mood"
-            app:destination="@id/navigation_mood" />
+            app:destination="@id/navigation_mood"
+            app:enterAnim="@anim/slide_up" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.natashaval.moodify.ui.dashboard.DashboardFragment"
+        android:name="com.natashaval.moodpod.ui.dashboard.DashboardFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_mood"
-        android:name="com.natashaval.moodify.ui.mood.MoodFragment"
+        android:name="com.natashaval.moodpod.ui.mood.MoodFragment"
         android:label="@string/title_mood"
         tools:layout="@layout/fragment_mood" />
 </navigation>

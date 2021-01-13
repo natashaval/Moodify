@@ -1,4 +1,4 @@
-package com.natashaval.moodify
+package com.natashaval.moodpod
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -17,6 +17,6 @@ import org.junit.Assert.*
   @Test fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("com.natashaval.moodify", appContext.packageName)
+    assertEquals("com.natashaval.moodpod", appContext.packageName)
   }
 }

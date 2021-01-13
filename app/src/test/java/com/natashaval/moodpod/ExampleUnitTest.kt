@@ -1,4 +1,4 @@
-package com.natashaval.moodify
+package com.natashaval.moodpod
 
 import org.junit.Test
 

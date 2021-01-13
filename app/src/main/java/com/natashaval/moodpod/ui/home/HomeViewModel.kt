@@ -1,4 +1,4 @@
-package com.natashaval.moodify.ui.home
+package com.natashaval.moodpod.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

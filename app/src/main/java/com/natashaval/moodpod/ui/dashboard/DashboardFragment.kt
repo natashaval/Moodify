@@ -1,4 +1,4 @@
-package com.natashaval.moodify.ui.dashboard
+package com.natashaval.moodpod.ui.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.natashaval.moodify.R
+import com.natashaval.moodpod.R
 
 class DashboardFragment : Fragment() {
 

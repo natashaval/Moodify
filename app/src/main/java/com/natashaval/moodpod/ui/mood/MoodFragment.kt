@@ -1,16 +1,13 @@
-package com.natashaval.moodify.ui.mood
+package com.natashaval.moodpod.ui.mood
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.natashaval.moodify.R
-import com.natashaval.moodify.databinding.FragmentMoodBinding
-import com.natashaval.moodify.util.ViewUtils.setSafeClickListener
+import com.natashaval.moodpod.databinding.FragmentMoodBinding
+import com.natashaval.moodpod.util.ViewUtils.setSafeClickListener
 
 class MoodFragment : Fragment() {
 

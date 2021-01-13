@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "com.natashaval.moodify"
+        applicationId "com.natashaval.moodpod"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
@@ -66,4 +69,8 @@ dependencies {
 
     // Logging
     implementation "com.jakewharton.timber:timber:$timber"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_android"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_android"
 }
