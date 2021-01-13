@@ -9,19 +9,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.natashaval.moodpod.R
+import com.natashaval.moodpod.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
 
   private lateinit var dashboardViewModel: DashboardViewModel
+  private var _binding: FragmentDashboardBinding? = null
+  private val binding get() = _binding!!
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
     dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
-    val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-    val textView: TextView = root.findViewById(R.id.text_dashboard)
+    _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+    return binding.root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-      textView.text = it
+      binding.textDashboard.text = it
     })
-    return root
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
   }
 }

@@ -13,14 +13,21 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_mood"
             app:destination="@id/navigation_mood"
-            app:enterAnim="@anim/slide_up" />
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.natashaval.moodpod.ui.dashboard.DashboardFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_mood2"
+            app:destination="@id/navigation_mood"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_mood"
