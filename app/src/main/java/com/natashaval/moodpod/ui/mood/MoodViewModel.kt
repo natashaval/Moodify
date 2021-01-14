@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.natashaval.moodpod.model.MoodRequest
 import com.natashaval.moodpod.repository.mood.MoodRepository
 
 class MoodViewModel @ViewModelInject constructor() :
@@ -13,4 +14,15 @@ class MoodViewModel @ViewModelInject constructor() :
     value = "I am happy too!"
   }
   val text: LiveData<String> = _text
+
+  private var _moodRequest = MutableLiveData<MoodRequest>()
+  val moodRequest: LiveData<MoodRequest> = _moodRequest
+
+  fun setMood(request: MoodRequest) {
+    _moodRequest.postValue(request)
+  }
+
+  fun setMoodMessage(message: String) {
+    _moodRequest.value?.message = message
+  }
 }

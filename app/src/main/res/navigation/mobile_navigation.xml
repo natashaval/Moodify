@@ -37,12 +37,13 @@
         <action
             android:id="@+id/action_navigation_mood_to_messageFragment"
             app:destination="@id/messageFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/messageFragment"
         android:name="com.natashaval.moodpod.ui.mood.MessageFragment"
-        android:label="fragment_message"
+        android:label="@string/title_message"
         tools:layout="@layout/fragment_message" >
         <action
             android:id="@+id/action_messageFragment_to_navigation_home"
