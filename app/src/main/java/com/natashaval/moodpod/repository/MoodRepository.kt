@@ -1,4 +1,4 @@
-package com.natashaval.moodpod.repository.mood
+package com.natashaval.moodpod.repository
 
 import javax.inject.Inject
 

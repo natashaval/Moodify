@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMessageBinding
-import com.natashaval.moodpod.util.ViewUtils.setSafeClickListener
+import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

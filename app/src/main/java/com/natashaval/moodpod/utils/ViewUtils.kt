@@ -1,4 +1,4 @@
-package com.natashaval.moodpod.util
+package com.natashaval.moodpod.utils
 
 import android.view.View
 import com.jakewharton.rxbinding4.view.clicks

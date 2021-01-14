@@ -15,11 +15,11 @@ import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMoodBinding
 import com.natashaval.moodpod.model.MoodRequest
-import com.natashaval.moodpod.util.ViewUtils.setSafeClickListener
+import com.natashaval.moodpod.model.Status
+import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.text.DateFormat
-import java.time.*
 import java.util.*
 
 @AndroidEntryPoint class MoodFragment : Fragment() {
@@ -27,6 +27,7 @@ import java.util.*
   private var _binding: FragmentMoodBinding? = null
   private val binding get() = _binding!!
   private val moodViewModel: MoodViewModel by activityViewModels()
+  private val affirmationViewModel: AffirmationViewModel by viewModels()
   private var localDate = Calendar.getInstance()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +40,12 @@ import java.util.*
     super.onViewCreated(view, savedInstanceState)
     // https://stackoverflow.com/questions/51955357/hide-android-bottom-navigation-view-for-child-screens-fragments
     (activity as MainActivity).showBottomNav(false)
+    affirmationViewModel.getAffirmation()
+    affirmationViewModel.affirmation.observe(viewLifecycleOwner, {
+      when(it.status) {
+        Status.SUCCESS -> binding.tvAffirmation.text = it.data?.affirmation
+      }
+    })
     binding.fabNext.setSafeClickListener {
       setMood()
       val action = MoodFragmentDirections.actionNavigationMoodToMessageFragment()

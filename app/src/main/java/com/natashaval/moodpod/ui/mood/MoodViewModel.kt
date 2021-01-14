@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.natashaval.moodpod.model.MoodRequest
-import com.natashaval.moodpod.repository.mood.MoodRepository
 
 class MoodViewModel @ViewModelInject constructor() :
     ViewModel() {

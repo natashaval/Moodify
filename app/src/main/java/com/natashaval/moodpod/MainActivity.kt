@@ -12,8 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.natashaval.moodpod.databinding.ActivityMainBinding
 import com.natashaval.moodpod.ui.dashboard.DashboardFragmentDirections
 import com.natashaval.moodpod.ui.home.HomeFragmentDirections
-import com.natashaval.moodpod.ui.mood.MoodFragment
-import com.natashaval.moodpod.util.ViewUtils.setSafeClickListener
+import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
