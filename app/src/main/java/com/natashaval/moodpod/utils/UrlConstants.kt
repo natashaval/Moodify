@@ -5,4 +5,5 @@ package com.natashaval.moodpod.utils
  */
 object UrlConstants {
   const val AFFIRMATION_URL = "https://www.affirmations.dev/"
+  const val QUOTE_URL = "https://zenquotes.io/"
 }

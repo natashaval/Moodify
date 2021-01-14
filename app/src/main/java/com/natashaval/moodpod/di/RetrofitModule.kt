@@ -3,7 +3,9 @@ package com.natashaval.moodpod.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.natashaval.moodpod.di.url.AffirmationUrl
+import com.natashaval.moodpod.di.url.QuoteUrl
 import com.natashaval.moodpod.utils.UrlConstants.AFFIRMATION_URL
+import com.natashaval.moodpod.utils.UrlConstants.QUOTE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,8 +31,16 @@ class RetrofitModule {
   @Provides
   @Singleton
   @AffirmationUrl
-  fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+  fun provideAffirmationRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
     return Retrofit.Builder().baseUrl(AFFIRMATION_URL).client(okHttpClient).addConverterFactory(
+        GsonConverterFactory.create(gson)).build()
+  }
+
+  @Provides
+  @Singleton
+  @QuoteUrl
+  fun provideZenRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    return Retrofit.Builder().baseUrl(QUOTE_URL).addConverterFactory(
         GsonConverterFactory.create(gson)).build()
   }
 

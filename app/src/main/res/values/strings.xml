@@ -15,4 +15,6 @@
     <string name="message_title">What\'s your story?</string>
     <string name="message_helper">%d/120 characters</string>
     <string name="affirmation_today">Affirmation Today!</string>
+    <string name="loading">loading</string>
+    <string name="quote">"%s"</string>
 </resources>
