@@ -6,18 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentHomeBinding
 import com.natashaval.moodpod.model.Status
+import com.natashaval.moodpod.utils.Constants
+import com.natashaval.moodpod.utils.CustomPreferences
 import com.natashaval.moodpod.utils.ViewUtils.hideView
 import com.natashaval.moodpod.utils.ViewUtils.showView
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.text.DateFormat
+import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -26,6 +30,8 @@ class HomeFragment : Fragment() {
   private val binding get() = _binding!!
   private val homeViewModel: HomeViewModel by viewModels()
   private lateinit var rotateAnim: Animation
+
+  @Inject lateinit var sharedPref: CustomPreferences
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
@@ -55,8 +61,12 @@ class HomeFragment : Fragment() {
           handleQuoteLoading(false)
           binding.itemQuote.tvQuote.showView()
           binding.itemQuote.tvAuthor.showView()
-          binding.itemQuote.tvQuote.text = getString(R.string.quote, it.data?.quote)
-          binding.itemQuote.tvAuthor.text = it.data?.author
+          it.data?.let { q ->
+            binding.itemQuote.tvQuote.text = getString(R.string.quote, q.quote)
+            binding.itemQuote.tvAuthor.text = q.author
+            sharedPref.putString(Constants.TODAY_QUOTE_PREF, q.quote)
+            sharedPref.putString(Constants.TODAY_AUTHOR_PREF, q.author)
+          }
         }
         Status.ERROR, Status.FAILED -> {
           handleQuoteLoading(false)

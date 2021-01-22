@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/loading"
         android:src="@drawable/ic_loading"
+        android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@id/tv_author"
         app:layout_constraintEnd_toEndOf="@id/tv_quote"
         app:layout_constraintStart_toStartOf="@id/tv_quote"
