@@ -9,10 +9,12 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentHomeBinding
 import com.natashaval.moodpod.model.Status
+import com.natashaval.moodpod.ui.adapter.MoodAdapter
 import com.natashaval.moodpod.utils.Constants
 import com.natashaval.moodpod.utils.CustomPreferences
 import com.natashaval.moodpod.utils.ViewUtils.hideView
@@ -42,12 +44,10 @@ class HomeFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     (activity as MainActivity).showBottomNav(true)
-    homeViewModel.text.observe(viewLifecycleOwner, Observer {
-      binding.textHome.text = it
-    })
     rotateAnim = AnimationUtils.loadAnimation(context, R.anim.rotate_clockwise)
 
     getQuoteToday()
+    setMoodAdapter()
   }
 
   private fun getQuoteToday() {
@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
             sharedPref.putString(Constants.TODAY_AUTHOR_PREF, q.author)
           }
         }
-        Status.ERROR, Status.FAILED -> {
+        else -> {
           handleQuoteLoading(false)
           binding.itemQuote.tvQuote.hideView()
           binding.itemQuote.tvAuthor.hideView()
@@ -85,6 +85,26 @@ class HomeFragment : Fragment() {
       binding.itemQuote.ivLoading.hideView()
       binding.itemQuote.ivLoading.clearAnimation()
     }
+  }
+
+  private fun setMoodAdapter() {
+    homeViewModel.getMoods()
+    homeViewModel.moodList.observe(viewLifecycleOwner, {
+      when (it.status) {
+        Status.SUCCESS -> {
+          it.data?.let { moodList ->
+            with(binding.rvMood) {
+              showView()
+              context?.let { ctx ->
+                adapter = MoodAdapter(ctx, moodList)
+                layoutManager = LinearLayoutManager(ctx)
+              }
+            }
+          }
+        }
+        else -> binding.rvMood.hideView()
+      }
+    })
   }
 
   override fun onDestroyView() {

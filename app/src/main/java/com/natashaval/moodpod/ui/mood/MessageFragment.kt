@@ -11,6 +11,8 @@ import com.jakewharton.rxbinding4.widget.textChanges
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMessageBinding
 import com.natashaval.moodpod.model.MoodStatus
+import com.natashaval.moodpod.utils.ViewUtils.convertDate
+import com.natashaval.moodpod.utils.ViewUtils.convertTime
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -52,18 +54,12 @@ class MessageFragment : Fragment() {
   private fun setDateTime() {
     moodViewModel.mood.observe(viewLifecycleOwner, { request ->
       Timber.d("MoodLog message: $request")
-      val calendar = Calendar.getInstance()
-      calendar.time = request.date
-      binding.etDate.setText(DateFormat.getDateInstance().format(calendar.time))
-      binding.etTime.setText(getString(R.string.time_detail, calendar.get(Calendar.HOUR_OF_DAY),
-          calendar.get(Calendar.MINUTE)))
+      binding.etDate.setText(request.date.convertDate())
+      binding.etTime.setText(request.date.convertTime())
 
-      when (request.mood) {
-        MoodStatus.Joy.name -> binding.ivMoodToday.setImageResource(R.drawable.ic_joy_filled)
-        MoodStatus.Happy.name -> binding.ivMoodToday.setImageResource(R.drawable.ic_happy_filled)
-        MoodStatus.Neutral.name -> binding.ivMoodToday.setImageResource(R.drawable.ic_neutral_filled)
-        MoodStatus.Sad.name -> binding.ivMoodToday.setImageResource(R.drawable.ic_sad_filled)
-      }
+      val moodStatus = request.mood.toLowerCase(Locale.getDefault())
+      val moodRes = resources.getIdentifier("ic_${moodStatus}_filled", "drawable", context?.packageName)
+      binding.ivMoodToday.setImageResource(moodRes)
     })
   }
 

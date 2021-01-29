@@ -4,9 +4,11 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.natashaval.moodpod.model.Mood
 import com.natashaval.moodpod.model.MyResponse
 import com.natashaval.moodpod.model.Quote
 import com.natashaval.moodpod.repository.AffirmationRepository
+import com.natashaval.moodpod.repository.MoodRepository
 import com.natashaval.moodpod.utils.Constants
 import com.natashaval.moodpod.utils.CustomPreferences
 import kotlinx.coroutines.CoroutineScope
@@ -18,15 +20,14 @@ import java.util.*
 
 class HomeViewModel @ViewModelInject constructor(
     private val affirmationRepository: AffirmationRepository,
+    private val moodRepository: MoodRepository,
     private val sharedPref: CustomPreferences) : ViewModel() {
-
-  private val _text = MutableLiveData<String>().apply {
-    value = "This is home Fragment"
-  }
-  val text: LiveData<String> = _text
 
   private var _quote = MutableLiveData<MyResponse<Quote>>()
   val quote: LiveData<MyResponse<Quote>> get() = _quote
+
+  private var _moodList = MutableLiveData<MyResponse<List<Mood>>>(MyResponse.empty())
+  val moodList: LiveData<MyResponse<List<Mood>>> get() = _moodList
 
   fun getQuoteToday() {
     if (!isDateToday()) {
@@ -50,5 +51,11 @@ class HomeViewModel @ViewModelInject constructor(
       return false
     }
     return true
+  }
+
+  fun getMoods() {
+    CoroutineScope(Dispatchers.IO).launch {
+      _moodList.postValue(moodRepository.getMoods())
+    }
   }
 }
