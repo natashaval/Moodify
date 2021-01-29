@@ -11,7 +11,8 @@ data class MyResponse<out T>(val status: Status, val data: T?, val message: Stri
         MyResponse(Status.ERROR, data, message)
 
     fun <T> loading(data: T? = null): MyResponse<T> = MyResponse(Status.LOADING, data, null)
+    fun <T> empty(): MyResponse<T> = MyResponse(Status.EMPTY, null, null)
   }
 }
 
-enum class Status { SUCCESS, FAILED, ERROR, LOADING }
+enum class Status { SUCCESS, FAILED, ERROR, LOADING, EMPTY }

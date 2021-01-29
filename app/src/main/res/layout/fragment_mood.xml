@@ -30,6 +30,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:textIsSelectable="false"
+            android:cursorVisible="false"
             android:inputType="date" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,6 +56,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:textIsSelectable="false"
+            android:cursorVisible="false"
             android:inputType="time" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,8 +95,9 @@
         android:id="@+id/tv_affirmation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/affirmation_today"
+        tools:text="@string/affirmation_today"
         android:fontFamily="@font/lato_italic"
+        android:textAlignment="center"
         android:layout_marginHorizontal="@dimen/margin_16"
         android:layout_marginBottom="@dimen/margin_16"
         app:layout_constraintBottom_toTopOf="@id/fab_next"

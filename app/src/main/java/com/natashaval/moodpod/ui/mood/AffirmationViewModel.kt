@@ -18,7 +18,7 @@ import timber.log.Timber
  */
 class AffirmationViewModel @ViewModelInject constructor(
     private val repository: AffirmationRepository) : ViewModel() {
-  private var _affirmation = MutableLiveData<MyResponse<Affirmation>>()
+  private var _affirmation = MutableLiveData<MyResponse<Affirmation>>(MyResponse.empty())
   val affirmation: LiveData<MyResponse<Affirmation>> get() = _affirmation
 
   val handler = CoroutineExceptionHandler { _, throwable ->
@@ -26,7 +26,6 @@ class AffirmationViewModel @ViewModelInject constructor(
   }
 
   fun getAffirmation() {
-    _affirmation.value = MyResponse.loading()
     CoroutineScope(Dispatchers.IO).launch(handler) {
       _affirmation.postValue(repository.getAffirmation())
     }

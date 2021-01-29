@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -14,8 +16,10 @@ import com.google.android.material.timepicker.TimeFormat
 import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMoodBinding
-import com.natashaval.moodpod.model.MoodRequest
+import com.natashaval.moodpod.model.Mood
+import com.natashaval.moodpod.model.MoodStatus
 import com.natashaval.moodpod.model.Status
+import com.natashaval.moodpod.utils.ViewUtils.hideView
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -40,10 +44,11 @@ import java.util.*
     super.onViewCreated(view, savedInstanceState)
     // https://stackoverflow.com/questions/51955357/hide-android-bottom-navigation-view-for-child-screens-fragments
     (activity as MainActivity).showBottomNav(false)
-    affirmationViewModel.getAffirmation()
     affirmationViewModel.affirmation.observe(viewLifecycleOwner, {
       when(it.status) {
+        Status.EMPTY -> affirmationViewModel.getAffirmation()
         Status.SUCCESS -> binding.tvAffirmation.text = it.data?.affirmation
+        else -> binding.tvAffirmation.hideView()
       }
     })
     binding.fabNext.setSafeClickListener {
@@ -87,12 +92,12 @@ import java.util.*
   private fun setMood() {
     var mood = ""
     when (binding.itemMood.radioGroupMood.checkedRadioButtonId) {
-      R.id.rb_mood_joy -> mood = MOOD_JOY
-      R.id.rb_mood_happy -> mood = MOOD_HAPPY
-      R.id.rb_mood_neutral -> mood = MOOD_NEUTRAL
-      R.id.rb_mood_sad -> mood = MOOD_SAD
+      R.id.rb_mood_joy -> mood = MoodStatus.Joy.name
+      R.id.rb_mood_happy -> mood = MoodStatus.Happy.name
+      R.id.rb_mood_neutral -> mood = MoodStatus.Neutral.name
+      R.id.rb_mood_sad -> mood = MoodStatus.Sad.name
     }
-    val request = MoodRequest(mood, "", localDate.time)
+    val request = Mood(mood, "", localDate.time)
     Timber.d("MoodLog request: $request")
     moodViewModel.setMood(request)
   }
@@ -105,12 +110,5 @@ import java.util.*
   override fun onDetach() {
     super.onDetach()
     (activity as MainActivity).showBottomNav(true)
-  }
-
-  companion object {
-    private const val MOOD_JOY = "MOOD_JOY"
-    private const val MOOD_HAPPY = "MOOD_HAPPY"
-    private const val MOOD_NEUTRAL = "MOOD_NEUTRAL"
-    private const val MOOD_SAD = "MOOD_SAD"
   }
 }

@@ -3,8 +3,10 @@ package com.natashaval.moodpod.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.natashaval.moodpod.di.url.AffirmationUrl
+import com.natashaval.moodpod.di.url.MoodPodUrl
 import com.natashaval.moodpod.di.url.QuoteUrl
 import com.natashaval.moodpod.utils.UrlConstants.AFFIRMATION_URL
+import com.natashaval.moodpod.utils.UrlConstants.MOODPOD_URL
 import com.natashaval.moodpod.utils.UrlConstants.QUOTE_URL
 import dagger.Module
 import dagger.Provides
@@ -27,6 +29,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 class RetrofitModule {
+
+  @Provides
+  @Singleton
+  @MoodPodUrl
+  fun provideMoodPodRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
+    return Retrofit.Builder().baseUrl(MOODPOD_URL).client(okHttpClient).addConverterFactory(
+      GsonConverterFactory.create(gson)).build()
+  }
 
   @Provides
   @Singleton
@@ -56,7 +66,7 @@ class RetrofitModule {
   @Provides
   @Singleton
   fun provideGson(): Gson {
-    return GsonBuilder().create()
+    return GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create()
   }
 
   // https://stackoverflow.com/questions/29921667/retrofit-2-catch-connection-timeout-exception
