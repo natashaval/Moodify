@@ -11,6 +11,7 @@ import com.natashaval.moodpod.repository.AffirmationRepository
 import com.natashaval.moodpod.repository.MoodRepository
 import com.natashaval.moodpod.utils.Constants
 import com.natashaval.moodpod.utils.CustomPreferences
+import com.natashaval.moodpod.utils.ViewUtils.convertDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,8 +44,7 @@ class HomeViewModel @ViewModelInject constructor(
 
   private fun isDateToday(): Boolean {
     val savedDate = sharedPref.getString(Constants.TODAY_DATE_PREF)
-    val todayDate = DateFormat.getDateInstance(DateFormat.MEDIUM).format(
-        Calendar.getInstance().timeInMillis)
+    val todayDate = Date().convertDate()
     Timber.d("MoodLog savedDate: $savedDate, todayDate: $todayDate")
     if (todayDate != savedDate) {
       sharedPref.putString(Constants.TODAY_DATE_PREF, todayDate)

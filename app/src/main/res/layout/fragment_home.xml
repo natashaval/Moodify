@@ -12,6 +12,17 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         layout="@layout/item_quote"
+        app:layout_constraintTop_toBottomOf="@id/rv_mood"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/item_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/item_month_history"
+        app:layout_constraintBottom_toTopOf="@id/rv_mood"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -20,10 +31,11 @@
         android:id="@+id/rv_mood"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_0dp"
-        android:layout_margin="@dimen/margin_8"
+        android:paddingHorizontal="@dimen/margin_8"
         tools:listitem="@layout/item_mood"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/item_quote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_quote" />
+        app:layout_constraintTop_toBottomOf="@id/item_month" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

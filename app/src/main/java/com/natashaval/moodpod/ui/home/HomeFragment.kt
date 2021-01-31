@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
 
     getQuoteToday()
     setMoodAdapter()
+    setMonthButton()
   }
 
   private fun getQuoteToday() {
@@ -105,6 +106,12 @@ class HomeFragment : Fragment() {
         else -> binding.rvMood.hideView()
       }
     })
+  }
+
+  private fun setMonthButton() {
+    with(binding.itemMonth) {
+      btMonthYear.text = sharedPref.getString(Constants.TODAY_DATE_PREF)
+    }
   }
 
   override fun onDestroyView() {

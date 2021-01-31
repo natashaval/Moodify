@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/bt_month_year"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="January 2021"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/bt_prev_month"
+        style="@style/CustomButton.Icon"
+        android:layout_width="@dimen/month_icon_size"
+        android:layout_height="@dimen/month_icon_size"
+        android:layout_marginEnd="@dimen/margin_8"
+        app:icon="@drawable/ic_arrow_left"
+        app:layout_constraintBottom_toBottomOf="@id/bt_month_year"
+        app:layout_constraintTop_toTopOf="@id/bt_month_year"
+        app:layout_constraintEnd_toStartOf="@id/bt_month_year" />
+
+    <Button
+        android:id="@+id/bt_next_month"
+        style="@style/CustomButton.Icon"
+        android:layout_width="@dimen/month_icon_size"
+        android:layout_height="@dimen/month_icon_size"
+        android:layout_marginStart="@dimen/margin_8"
+        app:icon="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="@id/bt_month_year"
+        app:layout_constraintTop_toTopOf="@id/bt_month_year"
+        app:layout_constraintStart_toEndOf="@id/bt_month_year" />
+
+    <TextView
+        android:id="@+id/tv_start_end"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="01 January 2021 - 31 January 2021"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bt_month_year"
+        app:layout_constraintStart_toStartOf="@id/bt_prev_month"
+        app:layout_constraintEnd_toEndOf="@id/bt_next_month" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
