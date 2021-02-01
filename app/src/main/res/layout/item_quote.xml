@@ -27,7 +27,7 @@
         android:fontFamily="@font/lato_light_italic"
         android:text="@string/affirmation_today"
         android:visibility="gone"
-        android:textAlignment="center"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@id/tv_author"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,12 +36,13 @@
 
     <TextView
         android:id="@+id/tv_author"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_4"
         android:fontFamily="@font/lato_regular"
         android:text="@string/affirmation_today"
         android:visibility="gone"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tv_quote"
         app:layout_constraintStart_toStartOf="@id/tv_quote"

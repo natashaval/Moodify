@@ -17,11 +17,13 @@ import com.natashaval.moodpod.model.Status
 import com.natashaval.moodpod.ui.adapter.MoodAdapter
 import com.natashaval.moodpod.utils.Constants
 import com.natashaval.moodpod.utils.CustomPreferences
+import com.natashaval.moodpod.utils.DateUtils.convertDate
+import com.natashaval.moodpod.utils.DateUtils.dateToCalendar
 import com.natashaval.moodpod.utils.ViewUtils.hideView
+import com.natashaval.moodpod.utils.DateUtils.parseISODate
+import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import com.natashaval.moodpod.utils.ViewUtils.showView
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
-import java.text.DateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -34,6 +36,7 @@ class HomeFragment : Fragment() {
   private lateinit var rotateAnim: Animation
 
   @Inject lateinit var sharedPref: CustomPreferences
+  private var todayDate: Date? = null
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
@@ -110,8 +113,28 @@ class HomeFragment : Fragment() {
 
   private fun setMonthButton() {
     with(binding.itemMonth) {
-      btMonthYear.text = sharedPref.getString(Constants.TODAY_DATE_PREF)
+      todayDate = sharedPref.getString(Constants.TODAY_DATE_PREF).parseISODate()
+      updateMonthYear(0)
+//      https://stackoverflow.com/questions/16392892/how-to-reduce-one-month-from-current-date-and-stored-in-date-variable-using-java
+      btPrevMonth.setSafeClickListener {
+        updateMonthYear(-1)
+      }
+      btNextMonth.setSafeClickListener {
+        updateMonthYear(1)
+      }
+      btMonthYear.setSafeClickListener {
+
+      }
     }
+  }
+
+  private fun updateMonthYear(value: Int) {
+    val calendar = todayDate?.dateToCalendar()
+    calendar?.add(Calendar.MONTH, value)
+    todayDate = calendar?.time
+    val split = todayDate?.convertDate()?.split(" ")
+    binding.itemMonth.btMonthYear.text = "${split?.get(0)} ${split?.get(2)}"
+
   }
 
   override fun onDestroyView() {

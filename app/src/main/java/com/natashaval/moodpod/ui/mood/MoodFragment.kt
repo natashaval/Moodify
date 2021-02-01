@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -19,6 +21,7 @@ import com.natashaval.moodpod.databinding.FragmentMoodBinding
 import com.natashaval.moodpod.model.Mood
 import com.natashaval.moodpod.model.MoodStatus
 import com.natashaval.moodpod.model.Status
+import com.natashaval.moodpod.utils.DateUtils.convertDate
 import com.natashaval.moodpod.utils.ViewUtils.hideView
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +35,7 @@ import java.util.*
   private val binding get() = _binding!!
   private val moodViewModel: MoodViewModel by activityViewModels()
   private val affirmationViewModel: AffirmationViewModel by viewModels()
-  private var localDate = Calendar.getInstance()
+  private var localDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
@@ -60,12 +63,22 @@ import java.util.*
   }
 
   private fun setDateTimePicker() {
+//    https://github.com/material-components/material-components-android/blob/d6761f24e37d09aea87d5a4c972fc1ae146c82a8/catalog/java/io/material/catalog/datepicker/DatePickerMainDemoFragment.java
+    val today = MaterialDatePicker.todayInUtcMilliseconds()
+    localDate.clear()
+    localDate.timeInMillis = today
     binding.etDate.setSafeClickListener {
       val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
-          .setSelection(Calendar.getInstance().timeInMillis)
+        .setSelection(today)
+        .setCalendarConstraints(
+          CalendarConstraints.Builder()
+              .setEnd(localDate.timeInMillis)
+              .setValidator(DateValidatorPointBackward.now())
+              .build()
+        )
       val datePicker = datePickerBuilder.build()
       datePicker.addOnPositiveButtonClickListener {
-        binding.etDate.setText(DateFormat.getDateInstance().format(it))
+        binding.etDate.setText(it.convertDate())
         localDate.timeInMillis = it
         Timber.d("MoodLog localDate: $localDate")
       }

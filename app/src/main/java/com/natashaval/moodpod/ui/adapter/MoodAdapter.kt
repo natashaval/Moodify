@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.ItemMoodBinding
 import com.natashaval.moodpod.model.Mood
-import com.natashaval.moodpod.utils.ViewUtils.convertDate
-import com.natashaval.moodpod.utils.ViewUtils.convertTime
+import com.natashaval.moodpod.utils.DateUtils.convertDate
+import com.natashaval.moodpod.utils.DateUtils.convertTime
 import java.util.*
 
 /**

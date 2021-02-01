@@ -15,7 +15,7 @@
     <dimen name="margin_64">64dp</dimen>
 
     <dimen name="mood_icon_size">60dp</dimen>
-    <dimen name="month_icon_size">24dp</dimen>
+    <dimen name="month_icon_size">28dp</dimen>
 
 <!--    Text Size-->
     <dimen name="mood_title">28sp</dimen>

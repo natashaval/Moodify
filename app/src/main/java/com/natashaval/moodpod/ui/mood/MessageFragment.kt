@@ -11,8 +11,8 @@ import com.jakewharton.rxbinding4.widget.textChanges
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMessageBinding
 import com.natashaval.moodpod.model.MoodStatus
-import com.natashaval.moodpod.utils.ViewUtils.convertDate
-import com.natashaval.moodpod.utils.ViewUtils.convertTime
+import com.natashaval.moodpod.utils.DateUtils.convertDate
+import com.natashaval.moodpod.utils.DateUtils.convertTime
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
