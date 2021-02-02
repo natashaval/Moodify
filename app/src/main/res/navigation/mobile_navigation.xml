@@ -14,6 +14,11 @@
             android:id="@+id/action_navigation_home_to_navigation_mood"
             app:destination="@id/navigation_mood"
             app:enterAnim="@anim/slide_up" />
+        <action
+            android:id="@+id/action_navigation_home_to_messageFragment"
+            app:destination="@id/messageFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
 
     <fragment
@@ -48,5 +53,13 @@
             app:popUpTo="@id/navigation_home"
             app:popUpToInclusive="true"
             app:exitAnim="@anim/slide_down" />
+        <argument
+            android:name="mood"
+            app:argType="com.natashaval.moodpod.model.Mood"
+            app:nullable="true" />
+        <argument
+            android:name="isNew"
+            app:argType="boolean"
+            android:defaultValue="true" />
     </fragment>
 </navigation>

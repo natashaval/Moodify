@@ -10,12 +10,13 @@ import com.natashaval.moodpod.databinding.ItemMoodBinding
 import com.natashaval.moodpod.model.Mood
 import com.natashaval.moodpod.utils.DateUtils.convertDate
 import com.natashaval.moodpod.utils.DateUtils.convertTime
+import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import java.util.*
 
 /**
  * Created by natasha.santoso on 29/01/21.
  */
-class MoodAdapter(private val context: Context?, private val moodList: List<Mood>) :
+class MoodAdapter(private val context: Context?, private val moodList: List<Mood>, private val listener: MoodListener) :
     RecyclerView.Adapter<MoodAdapter.MoodViewHolder>() {
   inner class MoodViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemMoodBinding.bind(view)
@@ -35,6 +36,9 @@ class MoodAdapter(private val context: Context?, private val moodList: List<Mood
         tvDate.text = mood.date.convertDate()
         tvTime.text = mood.date.convertTime()
         tvMessage.text = mood.message
+        root.setSafeClickListener {
+          listener.onMoodClick(mood)
+        }
       }
     }
   }
@@ -49,4 +53,8 @@ class MoodAdapter(private val context: Context?, private val moodList: List<Mood
   }
 
   override fun getItemCount(): Int = moodList.size
+
+  interface MoodListener {
+    fun onMoodClick(mood: Mood)
+  }
 }

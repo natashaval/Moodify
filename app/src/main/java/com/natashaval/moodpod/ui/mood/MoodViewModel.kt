@@ -26,15 +26,10 @@ class MoodViewModel @ViewModelInject constructor(private val repository: MoodRep
   private var _response = MutableLiveData<MyResponse<Mood>>()
   val response: LiveData<MyResponse<Mood>> = _response
 
-  fun setMood(request: Mood) {
-    _mood.postValue(request)
-  }
-
-  fun saveMood(message: String) {
-    _mood.value?.message = message
+  fun saveMood(mood: Mood) {
     _response.value = MyResponse.loading()
     CoroutineScope(Dispatchers.IO).launch {
-      _response.postValue(repository.saveMood(_mood.value))
+      _response.postValue(repository.saveMood(mood))
     }
   }
 }

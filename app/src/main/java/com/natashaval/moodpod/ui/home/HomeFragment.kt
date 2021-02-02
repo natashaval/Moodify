@@ -10,13 +10,16 @@ import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentHomeBinding
+import com.natashaval.moodpod.model.Mood
 import com.natashaval.moodpod.model.Status
 import com.natashaval.moodpod.ui.adapter.MoodAdapter
+import com.natashaval.moodpod.ui.mood.MessageFragmentDirections
 import com.natashaval.moodpod.utils.Constants
 import com.natashaval.moodpod.utils.CustomPreferences
 import com.natashaval.moodpod.utils.DateUtils.convertDate
@@ -31,7 +34,7 @@ import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), MoodAdapter.MoodListener {
 
   private var _binding: FragmentHomeBinding? = null
   private val binding get() = _binding!!
@@ -103,7 +106,7 @@ class HomeFragment : Fragment() {
             with(binding.rvMood) {
               showView()
               context?.let { ctx ->
-                adapter = MoodAdapter(ctx, moodList)
+                adapter = MoodAdapter(ctx, moodList, this@HomeFragment)
                 layoutManager = LinearLayoutManager(ctx)
               }
             }
@@ -158,5 +161,12 @@ class HomeFragment : Fragment() {
   override fun onDestroyView() {
     super.onDestroyView()
     _binding = null
+  }
+
+  override fun onMoodClick(mood: Mood) {
+    val action = HomeFragmentDirections.actionNavigationHomeToMessageFragment()
+        .setMood(mood)
+        .setIsNew(false)
+    findNavController().navigate(action)
   }
 }

@@ -53,8 +53,6 @@ import java.util.*
     })
     binding.fabNext.setSafeClickListener {
       setMood()
-      val action = MoodFragmentDirections.actionNavigationMoodToMessageFragment()
-      findNavController().navigate(action)
     }
     Timber.d("MoodLog localDate: $savedDate")
     setDateTimePicker()
@@ -107,7 +105,10 @@ import java.util.*
     }
     val request = Mood(mood, "", savedDate.time)
     Timber.d("MoodLog request: $request")
-    moodViewModel.setMood(request)
+//    moodViewModel.setMood(request)
+
+    val action = MoodFragmentDirections.actionNavigationMoodToMessageFragment(request)
+    findNavController().navigate(action)
   }
 
   override fun onDestroyView() {
