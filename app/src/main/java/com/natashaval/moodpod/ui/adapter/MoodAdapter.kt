@@ -26,7 +26,11 @@ class MoodAdapter(private val context: Context?, private val moodList: List<Mood
           val moodStatus = mood.mood.toLowerCase(Locale.getDefault())
           val moodRes = ctx.resources.getIdentifier("ic_${moodStatus}_filled", "drawable",
               ctx.packageName)
-          ivMood.setImageResource(moodRes)
+          if (moodRes == 0) {
+            ivMood.setImageResource(R.drawable.ic_emoticon_filled)
+          } else {
+            ivMood.setImageResource(moodRes)
+          }
         }
         tvDate.text = mood.date.convertDate()
         tvTime.text = mood.date.convertTime()

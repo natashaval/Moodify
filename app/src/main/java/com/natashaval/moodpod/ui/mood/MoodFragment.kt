@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.TimePicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -26,7 +24,6 @@ import com.natashaval.moodpod.utils.ViewUtils.hideView
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.text.DateFormat
 import java.util.*
 
 @AndroidEntryPoint class MoodFragment : Fragment() {
@@ -35,7 +32,7 @@ import java.util.*
   private val binding get() = _binding!!
   private val moodViewModel: MoodViewModel by activityViewModels()
   private val affirmationViewModel: AffirmationViewModel by viewModels()
-  private var localDate = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+  private var savedDate = Calendar.getInstance()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
@@ -59,44 +56,42 @@ import java.util.*
       val action = MoodFragmentDirections.actionNavigationMoodToMessageFragment()
       findNavController().navigate(action)
     }
+    Timber.d("MoodLog localDate: $savedDate")
     setDateTimePicker()
   }
 
   private fun setDateTimePicker() {
 //    https://github.com/material-components/material-components-android/blob/d6761f24e37d09aea87d5a4c972fc1ae146c82a8/catalog/java/io/material/catalog/datepicker/DatePickerMainDemoFragment.java
-    val today = MaterialDatePicker.todayInUtcMilliseconds()
-    localDate.clear()
-    localDate.timeInMillis = today
+    val todayDate = Calendar.getInstance()
     binding.etDate.setSafeClickListener {
       val datePickerBuilder = MaterialDatePicker.Builder.datePicker()
-        .setSelection(today)
+        .setSelection(todayDate.timeInMillis)
         .setCalendarConstraints(
           CalendarConstraints.Builder()
-              .setEnd(localDate.timeInMillis)
+              .setEnd(todayDate.timeInMillis)
               .setValidator(DateValidatorPointBackward.now())
               .build()
         )
       val datePicker = datePickerBuilder.build()
       datePicker.addOnPositiveButtonClickListener {
         binding.etDate.setText(it.convertDate())
-        localDate.timeInMillis = it
-        Timber.d("MoodLog localDate: $localDate")
+        savedDate.timeInMillis = it
+        Timber.d("MoodLog localDate: $savedDate")
       }
       datePicker.show(childFragmentManager, "MaterialDatePicker")
     }
 
     binding.etTime.setSafeClickListener {
-      val calendar = Calendar.getInstance()
       val timePickerBuilder = MaterialTimePicker.Builder()
           .setTimeFormat(TimeFormat.CLOCK_24H)
-          .setHour(calendar.get(Calendar.HOUR_OF_DAY))
-          .setMinute(calendar.get(Calendar.MINUTE))
+          .setHour(todayDate.get(Calendar.HOUR_OF_DAY))
+          .setMinute(todayDate.get(Calendar.MINUTE))
       val timePicker = timePickerBuilder.build()
       timePicker.addOnPositiveButtonClickListener {
         binding.etTime.setText(getString(R.string.time_detail, timePicker.hour, timePicker.minute))
-        localDate.set(Calendar.HOUR_OF_DAY, timePicker.hour)
-        localDate.set(Calendar.MINUTE, timePicker.minute)
-        Timber.d("MoodLog localTime: $localDate")
+        savedDate.set(Calendar.HOUR_OF_DAY, timePicker.hour)
+        savedDate.set(Calendar.MINUTE, timePicker.minute)
+        Timber.d("MoodLog localTime: $savedDate")
       }
       timePicker.show(childFragmentManager, "MaterialTimePicker")
     }
@@ -110,7 +105,7 @@ import java.util.*
       R.id.rb_mood_neutral -> mood = MoodStatus.Neutral.name
       R.id.rb_mood_sad -> mood = MoodStatus.Sad.name
     }
-    val request = Mood(mood, "", localDate.time)
+    val request = Mood(mood, "", savedDate.time)
     Timber.d("MoodLog request: $request")
     moodViewModel.setMood(request)
   }

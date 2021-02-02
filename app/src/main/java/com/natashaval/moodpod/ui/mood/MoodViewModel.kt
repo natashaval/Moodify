@@ -30,9 +30,6 @@ class MoodViewModel @ViewModelInject constructor(private val repository: MoodRep
     _mood.postValue(request)
   }
 
-  fun setMoodMessage(message: String) {
-  }
-
   fun saveMood(message: String) {
     _mood.value?.message = message
     _response.value = MyResponse.loading()

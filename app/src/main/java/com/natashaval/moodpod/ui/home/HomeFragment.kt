@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentHomeBinding
@@ -24,6 +26,7 @@ import com.natashaval.moodpod.utils.DateUtils.parseISODate
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import com.natashaval.moodpod.utils.ViewUtils.showView
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -122,8 +125,13 @@ class HomeFragment : Fragment() {
       btNextMonth.setSafeClickListener {
         updateMonthYear(1)
       }
+      val firstDate = Calendar.getInstance()
+      firstDate.set(Calendar.DAY_OF_MONTH, 1)
+      val lastDate = Calendar.getInstance()
+      lastDate.set(Calendar.DAY_OF_MONTH, lastDate.getActualMaximum(Calendar.DAY_OF_MONTH))
+      binding.itemMonth.tvStartEnd.text = getString(R.string.history_range, firstDate.time.convertDate(), lastDate.time.convertDate())
       btMonthYear.setSafeClickListener {
-
+        showDateRangePicker(Calendar.getInstance())
       }
     }
   }
@@ -134,7 +142,17 @@ class HomeFragment : Fragment() {
     todayDate = calendar?.time
     val split = todayDate?.convertDate()?.split(" ")
     binding.itemMonth.btMonthYear.text = "${split?.get(0)} ${split?.get(2)}"
+  }
 
+  private fun showDateRangePicker(todayDate: Calendar) {
+    val datePickerBuilder = MaterialDatePicker.Builder.dateRangePicker()
+      .setSelection(Pair(todayDate.timeInMillis, todayDate.timeInMillis))
+    val datePicker = datePickerBuilder.build()
+    datePicker.addOnPositiveButtonClickListener {
+      binding.itemMonth.tvStartEnd.text = getString(R.string.history_range, it.first?.convertDate(), it.second?.convertDate())
+      Timber.d("MoodLog startDate: ${it.first?.convertDate()} endDate: ${it.second?.convertDate()}")
+    }
+    datePicker.show(childFragmentManager, "MaterialDateRangePicker")
   }
 
   override fun onDestroyView() {

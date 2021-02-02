@@ -13,6 +13,7 @@ import com.natashaval.moodpod.databinding.FragmentMessageBinding
 import com.natashaval.moodpod.model.MoodStatus
 import com.natashaval.moodpod.utils.DateUtils.convertDate
 import com.natashaval.moodpod.utils.DateUtils.convertTime
+import com.natashaval.moodpod.utils.DateUtils.dateToCalendar
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -55,11 +56,17 @@ class MessageFragment : Fragment() {
     moodViewModel.mood.observe(viewLifecycleOwner, { request ->
       Timber.d("MoodLog message: $request")
       binding.etDate.setText(request.date.convertDate())
-      binding.etTime.setText(request.date.convertTime())
+      val calendar = request.date.dateToCalendar()
+      binding.etTime.setText(getString(R.string.time_detail, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE)))
+      binding.etMessage.setText(request.message)
 
       val moodStatus = request.mood.toLowerCase(Locale.getDefault())
       val moodRes = resources.getIdentifier("ic_${moodStatus}_filled", "drawable", context?.packageName)
-      binding.ivMoodToday.setImageResource(moodRes)
+      if (moodRes == 0) {
+        binding.ivMoodToday.setImageResource(R.drawable.ic_emoticon_filled)
+      } else {
+        binding.ivMoodToday.setImageResource(moodRes)
+      }
     })
   }
 

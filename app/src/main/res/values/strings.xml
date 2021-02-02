@@ -17,6 +17,7 @@
     <string name="affirmation_today">Affirmation Today!</string>
     <string name="loading">loading</string>
     <string name="quote">"%s"</string>
+    <string name="history_range">%s - %s</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo ut risus sit amet lobortis.</string>
 </resources>
