@@ -19,6 +19,9 @@
             app:destination="@id/messageFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_navigation_home_to_moodDetailFragment"
+            app:destination="@id/moodDetailFragment" />
     </fragment>
 
     <fragment
@@ -35,7 +38,7 @@
     <fragment
         android:id="@+id/navigation_mood"
         android:name="com.natashaval.moodpod.ui.mood.MoodFragment"
-        android:label="@string/title_mood"
+        android:label="@string/title_add"
         tools:layout="@layout/fragment_mood" >
         <action
             android:id="@+id/action_navigation_mood_to_messageFragment"
@@ -57,9 +60,15 @@
             android:name="mood"
             app:argType="com.natashaval.moodpod.model.Mood"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/moodDetailFragment"
+        android:name="com.natashaval.moodpod.ui.mood.MoodDetailFragment"
+        android:label="@string/title_mood"
+        tools:layout="@layout/fragment_mood_detail" >
         <argument
-            android:name="isNew"
-            app:argType="boolean"
-            android:defaultValue="true" />
+            android:name="moodItem"
+            app:argType="com.natashaval.moodpod.model.Mood"
+            app:nullable="true" />
     </fragment>
 </navigation>

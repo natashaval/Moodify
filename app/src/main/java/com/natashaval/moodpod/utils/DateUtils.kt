@@ -11,18 +11,23 @@ object DateUtils {
 
   //  https://stackoverflow.com/questions/454315/how-to-format-date-and-time-in-android
   fun Date.convertDate(): String {
-    val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM)
+    val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.UK)
     return dateFormat.format(this)
   }
 
   fun Long.convertDate(): String {
-    val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM)
+    val dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.UK)
     return dateFormat.format(this)
   }
 
   fun Date.convertTime(): String {
-    val timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.ENGLISH)
+    val timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.UK)
     return timeFormat.format(this)
+  }
+
+  fun Date.convertDateTime(): String {
+    val dateTimeFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, Locale.UK)
+    return dateTimeFormat.format(this)
   }
 
   fun Date.convertISODate(): String {

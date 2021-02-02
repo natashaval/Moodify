@@ -30,8 +30,7 @@ import java.util.*
 
   private var _binding: FragmentMoodBinding? = null
   private val binding get() = _binding!!
-  private val moodViewModel: MoodViewModel by activityViewModels()
-  private val affirmationViewModel: AffirmationViewModel by viewModels()
+  private val affirmationViewModel: AffirmationViewModel by activityViewModels()
   private var savedDate = Calendar.getInstance()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

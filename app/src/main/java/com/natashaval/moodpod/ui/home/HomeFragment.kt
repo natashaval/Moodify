@@ -144,7 +144,7 @@ class HomeFragment : Fragment(), MoodAdapter.MoodListener {
     calendar?.add(Calendar.MONTH, value)
     todayDate = calendar?.time
     val split = todayDate?.convertDate()?.split(" ")
-    binding.itemMonth.btMonthYear.text = "${split?.get(0)} ${split?.get(2)}"
+    binding.itemMonth.btMonthYear.text = "${split?.get(1)} ${split?.get(2)}"
   }
 
   private fun showDateRangePicker(todayDate: Calendar) {
@@ -164,9 +164,7 @@ class HomeFragment : Fragment(), MoodAdapter.MoodListener {
   }
 
   override fun onMoodClick(mood: Mood) {
-    val action = HomeFragmentDirections.actionNavigationHomeToMessageFragment()
-        .setMood(mood)
-        .setIsNew(false)
+    val action = HomeFragmentDirections.actionNavigationHomeToMoodDetailFragment(mood)
     findNavController().navigate(action)
   }
 }

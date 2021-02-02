@@ -4,8 +4,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_profile">Profile</string>
-    <string name="title_mood">Add</string>
+    <string name="title_add">Add</string>
     <string name="title_message">Message</string>
+    <string name="title_mood">Mood</string>
     <string name="title_more">More</string>
 
     <string name="feel_title">How do you feel?</string>
@@ -20,4 +21,6 @@
     <string name="history_range">%s - %s</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras commodo ut risus sit amet lobortis.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
