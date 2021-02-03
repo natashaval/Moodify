@@ -1,6 +1,7 @@
 package com.natashaval.moodpod.ui.mood
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,9 @@ class MoodDetailFragment : Fragment() {
     args.moodItem?.let {
       with(binding) {
         Timber.d("MoodLog message: $it")
-        tvDate.text = "${it.date.convertDateTime()}"
+        tvDate.text = "${it.date.convertDate()}"
+        tvTime.text = "${it.date.convertTime()}"
+        tvTimeAgo.text = DateUtils.getRelativeTimeSpanString(it.date.time)
         tvMessage.text = it.message
 
         val moodStatus = it.mood.toLowerCase(Locale.getDefault())

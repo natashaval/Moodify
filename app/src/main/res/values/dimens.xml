@@ -19,4 +19,5 @@
 
 <!--    Text Size-->
     <dimen name="mood_title">28sp</dimen>
+    <dimen name="mood_message">20sp</dimen>
 </resources>

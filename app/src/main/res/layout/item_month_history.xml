@@ -17,7 +17,7 @@
 
     <Button
         android:id="@+id/bt_prev_month"
-        style="@style/CustomButton.Icon"
+        style="@style/Custom.Button.Icon.Filled"
         android:layout_width="@dimen/month_icon_size"
         android:layout_height="@dimen/month_icon_size"
         android:layout_marginEnd="@dimen/margin_8"
@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/bt_next_month"
-        style="@style/CustomButton.Icon"
+        style="@style/Custom.Button.Icon.Filled"
         android:layout_width="@dimen/month_icon_size"
         android:layout_height="@dimen/month_icon_size"
         android:layout_marginStart="@dimen/margin_8"

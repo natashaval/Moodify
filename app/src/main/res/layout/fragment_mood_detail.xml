@@ -6,37 +6,115 @@
     android:layout_height="match_parent"
     tools:context=".ui.mood.MoodDetailFragment">
 
-    <TextView
-        android:id="@+id/tv_date"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="01 January 2021 23:59" />
-
     <ImageView
         android:id="@+id/iv_mood"
         android:layout_width="@dimen/mood_icon_size"
         android:layout_height="@dimen/mood_icon_size"
-        android:layout_marginVertical="@dimen/margin_8"
+        android:layout_marginHorizontal="@dimen/margin_16"
         android:src="@drawable/ic_joy_filled"
+        app:layout_constraintBottom_toTopOf="@id/tv_time_ago"
+        app:layout_constraintEnd_toStartOf="@id/item_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_edit" />
+
+    <TextView
+        android:id="@+id/tv_time_ago"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:fontFamily="@font/lato_light_italic"
+        android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@id/tv_message"
-        app:layout_constraintEnd_toEndOf="@id/tv_date"
-        app:layout_constraintStart_toStartOf="@id/tv_date"
-        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+        app:layout_constraintEnd_toEndOf="@id/iv_mood"
+        app:layout_constraintStart_toStartOf="@id/iv_mood"
+        app:layout_constraintTop_toBottomOf="@id/iv_mood"
+        tools:text="1 minute ago" />
 
     <TextView
         android:id="@+id/tv_message"
-        style="@style/TextAppearance.MaterialComponents.Body1"
+        style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_16"
+        android:layout_marginStart="@dimen/margin_16"
         android:layout_marginTop="@dimen/margin_8"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/margin_4"
+        android:fontFamily="@font/lato_regular"
+        android:textSize="@dimen/mood_message"
+        app:layout_constraintEnd_toStartOf="@id/item_edit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_mood"
+        app:layout_constraintTop_toBottomOf="@id/tv_time_ago"
         tools:text="@string/lorem_ipsum" />
+
+    <ImageView
+        android:id="@+id/iv_bg_date"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:src="@drawable/rectangle_background_mood"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline_date"
+        app:layout_constraintTop_toTopOf="@id/tv_date_title" />
+
+    <include
+        android:id="@+id/item_edit"
+        layout="@layout/item_mood_edit"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/tv_date_title"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/margin_8"
+        android:text="Date"
+        android:textColor="@color/colorPrimaryLight"
+        app:layout_constraintBottom_toTopOf="@id/tv_date"
+        app:layout_constraintStart_toStartOf="@id/tv_date" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_time_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/tv_time"
+        tools:text="01 Jan 2021" />
+
+    <TextView
+        android:id="@+id/tv_time_title"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textColor="@color/colorPrimaryLight"
+        app:layout_constraintBottom_toTopOf="@id/tv_time"
+        app:layout_constraintStart_toStartOf="@id/tv_time" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_12"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_bg_date"
+        tools:text="23:59" />
 </androidx.constraintlayout.widget.ConstraintLayout>
