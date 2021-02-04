@@ -32,4 +32,17 @@ class MoodViewModel @ViewModelInject constructor(private val repository: MoodRep
       _response.postValue(repository.saveMood(mood))
     }
   }
+
+  fun deleteMood(id: String) {
+    CoroutineScope(Dispatchers.IO).launch {
+      repository.deleteMood(id)
+    }
+  }
+
+  fun updateMood(id: String, mood: Mood) {
+    _response.value = MyResponse.loading()
+    CoroutineScope(Dispatchers.IO).launch {
+      _response.postValue(repository.updateMood(id, mood))
+    }
+  }
 }

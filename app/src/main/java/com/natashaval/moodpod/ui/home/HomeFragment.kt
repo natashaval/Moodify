@@ -19,7 +19,6 @@ import com.natashaval.moodpod.databinding.FragmentHomeBinding
 import com.natashaval.moodpod.model.Mood
 import com.natashaval.moodpod.model.Status
 import com.natashaval.moodpod.ui.adapter.MoodAdapter
-import com.natashaval.moodpod.ui.mood.MessageFragmentDirections
 import com.natashaval.moodpod.utils.Constants
 import com.natashaval.moodpod.utils.CustomPreferences
 import com.natashaval.moodpod.utils.DateUtils.convertDate

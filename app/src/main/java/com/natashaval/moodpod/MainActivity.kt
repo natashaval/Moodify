@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity() {
       fab.setSafeClickListener {
         when (navController.currentDestination?.id) {
           R.id.navigation_home -> {
-            val action = HomeFragmentDirections.actionNavigationHomeToNavigationMood()
+            val action = HomeFragmentDirections.actionNavigationHomeToNavigationMood(null)
             navController.navigate(action)
           }
           R.id.navigation_profile -> {
-            val action = DashboardFragmentDirections.actionNavigationProfileToNavigationMood2()
+            val action = DashboardFragmentDirections.actionNavigationProfileToNavigationMood2(null)
             navController.navigate(action)
           }
         }

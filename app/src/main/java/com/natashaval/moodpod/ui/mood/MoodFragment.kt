@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.jakewharton.rxbinding4.widget.checked
 import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMoodBinding
@@ -20,6 +22,8 @@ import com.natashaval.moodpod.model.Mood
 import com.natashaval.moodpod.model.MoodStatus
 import com.natashaval.moodpod.model.Status
 import com.natashaval.moodpod.utils.DateUtils.convertDate
+import com.natashaval.moodpod.utils.DateUtils.convertTime
+import com.natashaval.moodpod.utils.DateUtils.dateToCalendar
 import com.natashaval.moodpod.utils.ViewUtils.hideView
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +35,7 @@ import java.util.*
   private var _binding: FragmentMoodBinding? = null
   private val binding get() = _binding!!
   private val affirmationViewModel: AffirmationViewModel by activityViewModels()
+  private val args: MoodFragmentArgs by navArgs()
   private var savedDate = Calendar.getInstance()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +55,9 @@ import java.util.*
         else -> binding.tvAffirmation.hideView()
       }
     })
+    args.mood?.let {
+      setMoodEdit(it)
+    }
     binding.fabNext.setSafeClickListener {
       setMood()
     }
@@ -95,19 +103,29 @@ import java.util.*
   }
 
   private fun setMood() {
-    var mood = ""
+    var mood = args.mood?.mood ?: ""
     when (binding.itemMood.radioGroupMood.checkedRadioButtonId) {
       R.id.rb_mood_joy -> mood = MoodStatus.Joy.name
       R.id.rb_mood_happy -> mood = MoodStatus.Happy.name
       R.id.rb_mood_neutral -> mood = MoodStatus.Neutral.name
       R.id.rb_mood_sad -> mood = MoodStatus.Sad.name
+      R.id.rb_mood_worry -> mood = MoodStatus.Worry.name
     }
-    val request = Mood(mood, "", savedDate.time)
+    val request = Mood(mood, args.mood?.message ?: "", savedDate.time, id = args.mood?.id)
     Timber.d("MoodLog request: $request")
-//    moodViewModel.setMood(request)
 
     val action = MoodFragmentDirections.actionNavigationMoodToMessageFragment(request)
     findNavController().navigate(action)
+  }
+
+  private fun setMoodEdit(mood: Mood) {
+    val radioId = resources.getIdentifier("rb_mood_${mood.mood.toLowerCase(Locale.getDefault())}", "id", context?.packageName)
+    with(binding) {
+      itemMood.radioGroupMood.check(radioId)
+      etDate.setText(mood.date.convertDate())
+      etTime.setText(mood.date.convertTime())
+      savedDate = mood.date.dateToCalendar()
+    }
   }
 
   override fun onDestroyView() {

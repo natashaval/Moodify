@@ -11,6 +11,7 @@
         android:layout_width="@dimen/mood_icon_size"
         android:layout_height="@dimen/mood_icon_size"
         android:layout_marginHorizontal="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
         android:src="@drawable/ic_joy_filled"
         app:layout_constraintBottom_toTopOf="@id/tv_time_ago"
         app:layout_constraintEnd_toStartOf="@id/item_edit"
@@ -61,7 +62,6 @@
         layout="@layout/item_mood_edit"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -23,4 +23,14 @@ class MoodRepository @Inject constructor(private val api: MoodApi) {
     val response = api.saveMood(mood)
     return ResponseUtils.convert(response)
   }
+
+  suspend fun deleteMood(id: String): MyResponse<Boolean> {
+    val response = api.deleteMood(id)
+    return ResponseUtils.convert(response)
+  }
+
+  suspend fun updateMood(id: String, mood: Mood?): MyResponse<Mood> {
+    val response = api.updateMood(id, mood)
+    return ResponseUtils.convert(response)
+  }
 }

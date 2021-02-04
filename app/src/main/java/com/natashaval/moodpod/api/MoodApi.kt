@@ -18,7 +18,7 @@ interface MoodApi {
   suspend fun getMoodById(@Path("id") id: String): Response<Mood>
 
   @PUT("/mood/{id}")
-  suspend fun updateMood(@Path("id") id: String, @Body mood: Mood): Response<Mood>
+  suspend fun updateMood(@Path("id") id: String, @Body mood: Mood?): Response<Mood>
 
   @DELETE("/mood/{id}")
   suspend fun deleteMood(@Path("id") id: String): Response<Boolean>

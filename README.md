@@ -6,6 +6,10 @@
 3. User settings (?)
 4. Daily quotes [ZenQuotes](https://zenquotes.io/#docs)
 
+### Inspired by:
+- [Ryan Koroh Mood Dribble](https://dribbble.com/shots/7109146-Mood)
+- [Flat Icon Emoji Pack](https://www.flaticon.com/packs/emojis-59)
+
 ### Source:
 1. Share viewmodel between fragments  
   - https://developer.android.com/topic/libraries/architecture/viewmodel.html#sharing

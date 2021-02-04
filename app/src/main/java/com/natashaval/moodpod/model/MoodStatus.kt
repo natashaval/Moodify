@@ -7,5 +7,6 @@ enum class MoodStatus {
     Joy,
     Happy,
     Neutral,
-    Sad
+    Sad,
+    Worry
 }

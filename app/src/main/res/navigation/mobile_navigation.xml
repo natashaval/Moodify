@@ -44,6 +44,10 @@
             android:id="@+id/action_navigation_mood_to_messageFragment"
             app:destination="@id/messageFragment"
             app:enterAnim="@android:anim/fade_in" />
+        <argument
+            android:name="mood"
+            app:argType="com.natashaval.moodpod.model.Mood"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/messageFragment"
@@ -70,5 +74,8 @@
             android:name="moodItem"
             app:argType="com.natashaval.moodpod.model.Mood"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_moodDetailFragment_to_navigation_mood"
+            app:destination="@id/navigation_mood" />
     </fragment>
 </navigation>
