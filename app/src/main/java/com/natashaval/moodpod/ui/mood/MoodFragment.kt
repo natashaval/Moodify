@@ -47,7 +47,6 @@ import java.util.*
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     // https://stackoverflow.com/questions/51955357/hide-android-bottom-navigation-view-for-child-screens-fragments
-    (activity as MainActivity).showBottomNav(false)
     affirmationViewModel.affirmation.observe(viewLifecycleOwner, {
       when(it.status) {
         Status.EMPTY -> affirmationViewModel.getAffirmation()
@@ -131,10 +130,5 @@ import java.util.*
   override fun onDestroyView() {
     super.onDestroyView()
     _binding = null
-  }
-
-  override fun onDetach() {
-    super.onDetach()
-    (activity as MainActivity).showBottomNav(true)
   }
 }

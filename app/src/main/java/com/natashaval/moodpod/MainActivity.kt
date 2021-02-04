@@ -51,6 +51,13 @@ class MainActivity : AppCompatActivity() {
         }
       }
     }
+
+    findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { _, destination, _ ->
+      when(destination.id) {
+        R.id.navigation_home, R.id.navigation_profile -> showBottomNav(true)
+        else -> showBottomNav(false)
+      }
+    }
   }
 
   override fun onSupportNavigateUp(): Boolean {
@@ -58,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
   }
 
-  fun showBottomNav(isShow: Boolean = false) {
+  private fun showBottomNav(isShow: Boolean = false) {
     binding.bottomAppBar.visibility = if (isShow) View.VISIBLE else View.GONE
     if (isShow) binding.fab.show() else binding.fab.hide()
   }

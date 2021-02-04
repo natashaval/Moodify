@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentHomeBinding
 import com.natashaval.moodpod.model.Mood
@@ -25,6 +24,7 @@ import com.natashaval.moodpod.utils.DateUtils.convertDate
 import com.natashaval.moodpod.utils.DateUtils.dateToCalendar
 import com.natashaval.moodpod.utils.ViewUtils.hideView
 import com.natashaval.moodpod.utils.DateUtils.parseISODate
+import com.natashaval.moodpod.utils.ViewUtils.resolveOrThrowAttr
 import com.natashaval.moodpod.utils.ViewUtils.setSafeClickListener
 import com.natashaval.moodpod.utils.ViewUtils.showView
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +41,9 @@ class HomeFragment : Fragment(), MoodAdapter.MoodListener {
   private lateinit var rotateAnim: Animation
 
   @Inject lateinit var sharedPref: CustomPreferences
-  private var todayDate: Date? = null
+  private val todayDate = Calendar.getInstance()
+  private var firstDate = Calendar.getInstance()
+  private var lastDate = Calendar.getInstance()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?): View? {
@@ -51,7 +53,6 @@ class HomeFragment : Fragment(), MoodAdapter.MoodListener {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    (activity as MainActivity).showBottomNav(true)
     rotateAnim = AnimationUtils.loadAnimation(context, R.anim.rotate_clockwise)
 
     getQuoteToday()
@@ -118,40 +119,48 @@ class HomeFragment : Fragment(), MoodAdapter.MoodListener {
 
   private fun setMonthButton() {
     with(binding.itemMonth) {
-      todayDate = sharedPref.getString(Constants.TODAY_DATE_PREF).parseISODate()
-      updateMonthYear(0)
+      updateMonthYear(0, todayDate, todayDate)
+      updateDateRange(firstDate, lastDate)
 //      https://stackoverflow.com/questions/16392892/how-to-reduce-one-month-from-current-date-and-stored-in-date-variable-using-java
       btPrevMonth.setSafeClickListener {
-        updateMonthYear(-1)
+        updateMonthYear(-1, firstDate, lastDate)
+        updateDateRange(firstDate, lastDate)
       }
       btNextMonth.setSafeClickListener {
-        updateMonthYear(1)
+        updateMonthYear(1, firstDate, lastDate)
+        updateDateRange(firstDate, lastDate)
       }
-      val firstDate = Calendar.getInstance()
-      firstDate.set(Calendar.DAY_OF_MONTH, 1)
-      val lastDate = Calendar.getInstance()
-      lastDate.set(Calendar.DAY_OF_MONTH, lastDate.getActualMaximum(Calendar.DAY_OF_MONTH))
-      binding.itemMonth.tvStartEnd.text = getString(R.string.history_range, firstDate.time.convertDate(), lastDate.time.convertDate())
+
+
       btMonthYear.setSafeClickListener {
         showDateRangePicker(Calendar.getInstance())
       }
     }
   }
 
-  private fun updateMonthYear(value: Int) {
-    val calendar = todayDate?.dateToCalendar()
-    calendar?.add(Calendar.MONTH, value)
-    todayDate = calendar?.time
-    val split = todayDate?.convertDate()?.split(" ")
+  private fun updateMonthYear(value: Int, first: Calendar, last: Calendar) {
+    first.add(Calendar.MONTH, value)
+    last.add(Calendar.MONTH, value)
+    val split = last.time.convertDate().split(" ")
     binding.itemMonth.btMonthYear.text = "${split?.get(1)} ${split?.get(2)}"
+  }
+
+  private fun updateDateRange(first: Calendar, last: Calendar) {
+    first.set(Calendar.DAY_OF_MONTH, 1)
+    last.set(Calendar.DAY_OF_MONTH, last.getActualMaximum(Calendar.DAY_OF_MONTH))
+    binding.itemMonth.tvStartEnd.text = getString(R.string.history_range, first.time.convertDate(), last.time.convertDate())
   }
 
   private fun showDateRangePicker(todayDate: Calendar) {
     val datePickerBuilder = MaterialDatePicker.Builder.dateRangePicker()
       .setSelection(Pair(todayDate.timeInMillis, todayDate.timeInMillis))
+      .setTheme(resolveOrThrowAttr(requireContext(), R.attr.materialCalendarTheme))
     val datePicker = datePickerBuilder.build()
     datePicker.addOnPositiveButtonClickListener {
       binding.itemMonth.tvStartEnd.text = getString(R.string.history_range, it.first?.convertDate(), it.second?.convertDate())
+      firstDate = Date(it.first!!).dateToCalendar()
+      lastDate = Date(it.second!!).dateToCalendar()
+      updateMonthYear(0, firstDate, lastDate)
       Timber.d("MoodLog startDate: ${it.first?.convertDate()} endDate: ${it.second?.convertDate()}")
     }
     datePicker.show(childFragmentManager, "MaterialDateRangePicker")

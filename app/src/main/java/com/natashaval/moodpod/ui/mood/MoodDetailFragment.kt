@@ -39,7 +39,6 @@ class MoodDetailFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    (activity as MainActivity).showBottomNav(false)
     setMoodDetail()
   }
 
@@ -90,10 +89,5 @@ class MoodDetailFragment : Fragment() {
   override fun onDestroyView() {
     super.onDestroyView()
     _binding = null
-  }
-
-  override fun onDetach() {
-    super.onDetach()
-    (activity as MainActivity).showBottomNav(true)
   }
 }
