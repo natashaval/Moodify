@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/bt_activity_label"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/activity"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_arrow_down"
+        app:iconGravity="end"
+        app:layout_constraintBottom_toTopOf="@id/cg_activity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_relation_label"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/relationship"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_arrow_down"
+        app:iconGravity="end"
+        app:layout_constraintBottom_toTopOf="@id/cg_relation"
+        app:layout_constraintEnd_toEndOf="@id/bt_activity_label"
+        app:layout_constraintStart_toStartOf="@id/bt_activity_label"
+        app:layout_constraintTop_toBottomOf="@id/cg_activity" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_activity"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/bt_activity_label"
+        app:layout_constraintStart_toStartOf="@id/bt_activity_label"
+        app:layout_constraintTop_toBottomOf="@id/bt_activity_label" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_relation"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/bt_relation_label"
+        app:layout_constraintStart_toStartOf="@id/bt_relation_label"
+        app:layout_constraintTop_toBottomOf="@id/bt_relation_label" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

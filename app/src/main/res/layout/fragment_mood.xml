@@ -85,7 +85,7 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         layout="@layout/item_mood_default"
-        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_12"
         android:layout_marginHorizontal="@dimen/margin_8"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,9 +120,21 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         layout="@layout/view_other_mood"
-        android:layout_marginTop="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_12"
         android:layout_marginHorizontal="@dimen/margin_8"
+        app:layout_constraintBottom_toTopOf="@id/item_chip"
         app:layout_constraintTop_toBottomOf="@id/item_mood"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/item_chip"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        layout="@layout/view_mood_label"
+        android:layout_marginHorizontal="@dimen/margin_4"
+        app:layout_constraintBottom_toTopOf="@id/tv_affirmation"
+        app:layout_constraintTop_toBottomOf="@id/item_other_mood"
+        app:layout_constraintStart_toStartOf="@id/item_other_mood"
+        app:layout_constraintEnd_toEndOf="@id/item_other_mood" />
 </androidx.constraintlayout.widget.ConstraintLayout>

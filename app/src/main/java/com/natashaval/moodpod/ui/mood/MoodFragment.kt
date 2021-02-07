@@ -8,22 +8,20 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import com.jakewharton.rxbinding4.widget.checked
-import com.natashaval.moodpod.MainActivity
 import com.natashaval.moodpod.R
 import com.natashaval.moodpod.databinding.FragmentMoodBinding
 import com.natashaval.moodpod.model.Mood
-import com.natashaval.moodpod.model.MoodStatus
 import com.natashaval.moodpod.model.Status
 import com.natashaval.moodpod.ui.adapter.OtherMoodAdapter
 import com.natashaval.moodpod.utils.DateUtils.convertDate
@@ -68,6 +66,10 @@ import java.util.*
     Timber.d("MoodLog localDate: $savedDate")
     setDateTimePicker()
     setOtherMoodViewPager()
+    setChipGroup(binding.itemChip.cgRelation,
+        arrayListOf("family", "partner", "friend", "colleague", "stranger"))
+    setChipGroup(binding.itemChip.cgActivity,
+        arrayListOf("sleep", "work", "travel", "shopping", "party", "education", "exercise"))
   }
 
   private fun setDateTimePicker() {
@@ -154,6 +156,16 @@ import java.util.*
   private var tabPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
     override fun onPageSelected(position: Int) {
       Toast.makeText(requireContext(), "Selected position: $position", Toast.LENGTH_SHORT).show()
+    }
+  }
+
+  private fun setChipGroup(view: ChipGroup, list: ArrayList<String>) {
+    context?.let { ctx ->
+      list.forEach {
+        val chip = Chip(ctx)
+        chip.text = it
+        view.addView(chip)
+      }
     }
   }
 

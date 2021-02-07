@@ -5,16 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--include
-        android:id="@+id/tab_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        layout="@layout/tab_other_mood"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" /-->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_header"
+        style="@style/Widget.MaterialComponents.TabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="scrollable"
