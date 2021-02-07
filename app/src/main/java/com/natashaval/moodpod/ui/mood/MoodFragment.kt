@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -102,14 +103,7 @@ import java.util.*
   }
 
   private fun setMood() {
-    var mood = args.mood?.mood ?: ""
-    when (binding.itemMood.radioGroupMood.checkedRadioButtonId) {
-      R.id.rb_mood_joy -> mood = MoodStatus.Joy.name
-      R.id.rb_mood_happy -> mood = MoodStatus.Happy.name
-      R.id.rb_mood_neutral -> mood = MoodStatus.Neutral.name
-      R.id.rb_mood_sad -> mood = MoodStatus.Sad.name
-      R.id.rb_mood_worry -> mood = MoodStatus.Worry.name
-    }
+    val mood = args.mood?.mood ?: getRadioSelector(binding.itemMood.radioGroupMood)
     val request = Mood(mood, args.mood?.message ?: "", savedDate.time, id = args.mood?.id)
     Timber.d("MoodLog request: $request")
 
@@ -125,6 +119,22 @@ import java.util.*
       etTime.setText(mood.date.convertTime())
       savedDate = mood.date.dateToCalendar()
     }
+  }
+
+//    https://stackoverflow.com/questions/2597230/loop-through-all-subviews-of-an-android-view
+//    https://stackoverflow.com/questions/10137692/how-to-get-resource-name-from-resource-id
+  private fun getRadioSelector(view: ViewGroup): String {
+    for (i in 0..view.childCount) {
+      val child = view.getChildAt(i)
+      if (child !is ViewGroup && view is RadioGroup) {
+        Timber.d("MoodLog radio selector id: ${child.id}")
+        if (child.id == view.checkedRadioButtonId) {
+          val name = resources.getResourceEntryName(child.id)
+          return name.split("_")[2]
+        }
+      }
+    }
+    return ""
   }
 
   override fun onDestroyView() {
