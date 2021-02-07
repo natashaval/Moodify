@@ -16,6 +16,7 @@
 
     <dimen name="mood_icon_size">60dp</dimen>
     <dimen name="month_icon_size">28dp</dimen>
+    <dimen name="other_mood_height">120dp</dimen>
 
 <!--    Text Size-->
     <dimen name="mood_title">28sp</dimen>

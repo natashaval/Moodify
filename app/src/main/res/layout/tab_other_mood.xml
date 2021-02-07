@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:viewBindingIgnore="true">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_love"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_love" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_funny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_funny" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_surprised"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_surprised" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_angry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_angry" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_tired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_tired" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tab_crazy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tab_crazy" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+</LinearLayout>
