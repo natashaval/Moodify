@@ -1,0 +1,25 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compileOnly "com.android.tools.lint:lint-api:$lint"
+    compileOnly "com.android.tools.lint:lint-checks:$lint"
+
+    testImplementation "com.android.tools.lint:lint:$lint"
+    testImplementation "com.android.tools.lint:lint-tests:$lint"
+}
+
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "com.natashaval.lints.CustomIssueRegistry")
+    }
+}
