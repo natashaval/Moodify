@@ -4,6 +4,7 @@ import com.android.SdkConstants
 import com.android.resources.ResourceFolderType
 import com.android.tools.lint.detector.api.*
 import org.w3c.dom.Attr
+import java.util.*
 
 // https://coderamblings.dev/posts/custom-android-xml-lint-rules-with-kotlin/
 //https://github.com/alexjlockwood/android-lint-checks-demo
@@ -26,11 +27,11 @@ class XmlMarginDetector : ResourceXmlDetector() {
     val matchResult = "\\w*([0-9]+)dp".toRegex().matchEntire(attribute.value)
     matchResult?.let {
       val marginDp = it.value
-      if (!marginDp.startsWith("margin_")) {
+      if (!marginDp.startsWith("margin_") || !marginDp.startsWith("@dimen/margin_")) {
         context.report(
-            issue = ISSUE_XML_MARGIN,
-            location = context.getLocation(attribute),
-            message = "hardcoded margin should not be used"
+            ISSUE_XML_MARGIN,
+            context.getLocation(attribute),
+            "should not use hardcode margin, use margin from dimen module"
         )
       }
     }
@@ -47,8 +48,10 @@ class XmlMarginDetector : ResourceXmlDetector() {
         explanation = "margin should be increment of 2",
         category = Category.CORRECTNESS,
         priority = 2,
-        severity = Severity.INFORMATIONAL,
-        implementation = Implementation(XmlMarginDetector::class.java, Scope.RESOURCE_FILE_SCOPE)
+        severity = Severity.WARNING,
+        implementation = Implementation(
+            XmlMarginDetector::class.java,
+            EnumSet.of(Scope.RESOURCE_FILE, Scope.TEST_SOURCES))
     )
   }
 }

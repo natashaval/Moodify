@@ -15,26 +15,32 @@ class NamingPatternDetectorTest : LintDetectorTest() {
 
   override fun getIssues(): MutableList<Issue> = mutableListOf(NamingPatternDetector.ISSUE_NAMING_PATTERN)
 
-  @Test fun correctClassName() {
+  @Test
+  fun testCorrectClassName() {
     lint().files(java("""
       |package foo;
       |
       |class XmlHttpRequest {
       |}
-    """.trimMargin())).issues(NamingPatternDetector.ISSUE_NAMING_PATTERN).run().expectClean()
+    """.trimMargin())).issues(NamingPatternDetector.ISSUE_NAMING_PATTERN)
+      .run()
+      .expectClean()
   }
 
-  @Test fun incorrectClassName() {
+  @Test
+  fun testIncorrectClassName() {
     lint().files(java("""
       |package foo;
       |
       |class XMLHTTPRequest {
       |}
-    """.trimMargin())).issues(NamingPatternDetector.ISSUE_NAMING_PATTERN).run().expect("""
+    """.trimMargin())).issues(NamingPatternDetector.ISSUE_NAMING_PATTERN).run()
+      .expect("""
       |src/foo/XMLHTTPRequest.java:3: Warning: Class is not named in defined camel case. [NamingPattern]
       |class XMLHTTPRequest {
       |      ~~~~~~~~~~~~~~
       |0 errors, 1 warnings
     """.trimMargin())
+        .expectWarningCount(1)
   }
 }
