@@ -30,16 +30,18 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
       }
     }
   }
-}
 
-val ISSUE_NAMING_PATTERN = Issue.create("NamingPattern",
-    "Class name should be in camel case",
-    "The separation of words with a single capitalized letter, and the first word starting with either case",
-    Category.CORRECTNESS,
-    5,
-    Severity.WARNING,
-    Implementation(
-        NamingPatternDetector::class.java,
-        EnumSet.of(Scope.JAVA_FILE, Scope.TEST_SOURCES)
+  companion object {
+    val ISSUE_NAMING_PATTERN = Issue.create("NamingPattern",
+        "Class name should be in camel case",
+        "The separation of words with a single capitalized letter, and the first word starting with either case",
+        Category.CORRECTNESS,
+        5,
+        Severity.WARNING,
+        Implementation(
+            NamingPatternDetector::class.java,
+            EnumSet.of(Scope.JAVA_FILE, Scope.TEST_SOURCES)
+        )
     )
-)
+  }
+}

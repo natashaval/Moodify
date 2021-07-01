@@ -38,7 +38,7 @@
         android:id="@+id/tv_author"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_4"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/lato_regular"
         android:text="@string/affirmation_today"
         android:visibility="gone"

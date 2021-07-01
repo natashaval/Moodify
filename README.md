@@ -15,3 +15,5 @@
   - https://developer.android.com/topic/libraries/architecture/viewmodel.html#sharing
 2. Connection timeout exception retrofit  
   - https://stackoverflow.com/questions/29921667/retrofit-2-catch-connection-timeout-exception
+3. Custom lint
+  - https://googlesamples.github.io/android-custom-lint-rules/api-guide.html
