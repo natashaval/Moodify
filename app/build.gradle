@@ -79,6 +79,5 @@ dependencies {
     kapt "androidx.hilt:hilt-compiler:$hilt_viewmodel"
 
     //lint
-    lintChecks project(":lints")
-
+    lintChecks project(":rules")
 }

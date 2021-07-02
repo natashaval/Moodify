@@ -19,6 +19,6 @@ dependencies {
 
 jar {
     manifest {
-        attributes("Lint-Registry-v2": "com.natashaval.lints.CustomIssueRegistry")
+        attributes("Lint-Registry-v2": "com.natashaval.rules.CustomIssueRegistry")
     }
 }

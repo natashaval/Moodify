@@ -1,4 +1,4 @@
-package com.natashaval.lints.xml
+package com.natashaval.rules.xml
 
 import com.android.SdkConstants
 import com.android.resources.ResourceFolderType
@@ -31,7 +31,7 @@ class XmlMarginDetector : ResourceXmlDetector() {
         context.report(
             ISSUE_XML_MARGIN,
             context.getLocation(attribute),
-            "should not use hardcode margin, use margin from dimen module"
+            "do not use hardcoded margin, use margin from dimen module"
         )
       }
     }

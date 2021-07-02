@@ -1,9 +1,9 @@
-package com.natashaval.lints
+package com.natashaval.rules
 
 import com.android.tools.lint.client.api.IssueRegistry
 import com.android.tools.lint.detector.api.Issue
-import com.natashaval.lints.general.NamingPatternDetector
-import com.natashaval.lints.xml.XmlMarginDetector
+import com.natashaval.rules.general.NamingPatternDetector
+import com.natashaval.rules.xml.XmlMarginDetector
 
 // https://medium.com/@vanniktech/writing-your-first-lint-check-39ad0e90b9e6
 class CustomIssueRegistry : IssueRegistry() {
