@@ -1,5 +1,10 @@
 plugins {
     id 'kotlin'
+    id 'com.android.lint'
+}
+
+ext {
+    lint_version = "27.0.0"
 }
 
 java {
@@ -8,17 +13,18 @@ java {
 }
 
 dependencies {
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    compileOnly "com.android.tools.lint:lint-api:$lint"
-    compileOnly "com.android.tools.lint:lint-checks:$lint"
+    compileOnly "com.android.tools.lint:lint-api:$lint_version"
+    compileOnly "com.android.tools.lint:lint-checks:$lint_version"
 
-    testImplementation "com.android.tools.lint:lint:$lint"
-    testImplementation "com.android.tools.lint:lint-tests:$lint"
+    testImplementation "com.android.tools.lint:lint:$lint_version"
+    testImplementation "com.android.tools.lint:lint-tests:$lint_version"
+    testImplementation "junit:junit:$junit"
 }
 
 jar {
     manifest {
-        attributes("Lint-Registry-v2": "com.natashaval.rules.CustomIssueRegistry")
+        attributes 'Lint-Registry-V2': 'com.natashaval.rules.CustomIssueRegistry'
     }
 }

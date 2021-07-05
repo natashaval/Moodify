@@ -10,7 +10,7 @@
         style="@style/Custom.Button.Icon.NoBorder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_8"
+        android:layout_margin="8dp"
         app:icon="@drawable/ic_edit" />
 
     <Button

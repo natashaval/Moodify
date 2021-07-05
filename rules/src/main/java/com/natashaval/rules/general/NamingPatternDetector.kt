@@ -40,7 +40,7 @@ class NamingPatternDetector : Detector(), Detector.UastScanner {
         Severity.WARNING,
         Implementation(
             NamingPatternDetector::class.java,
-            EnumSet.of(Scope.JAVA_FILE, Scope.TEST_SOURCES)
+            Scope.JAVA_FILE_SCOPE
         )
     )
   }

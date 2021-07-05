@@ -12,7 +12,7 @@ import java.util.*
 /**
  * Created by natasha.santoso on 28/06/21.
  */
-class XmlMarginDetector : ResourceXmlDetector() {
+class XmlMarginDetector : LayoutDetector() {
   override fun getApplicableAttributes(): Collection<String>? {
     return listOf(
         SdkConstants.ATTR_LAYOUT_MARGIN,
@@ -20,25 +20,23 @@ class XmlMarginDetector : ResourceXmlDetector() {
         SdkConstants.ATTR_LAYOUT_MARGIN_BOTTOM,
         SdkConstants.ATTR_LAYOUT_MARGIN_START,
         SdkConstants.ATTR_LAYOUT_MARGIN_END,
+        SdkConstants.ATTR_LAYOUT_MARGIN_HORIZONTAL,
+        SdkConstants.ATTR_LAYOUT_MARGIN_VERTICAL,
     )
   }
 
   override fun visitAttribute(context: XmlContext, attribute: Attr) {
     val matchResult = "\\w*([0-9]+)dp".toRegex().matchEntire(attribute.value)
     matchResult?.let {
-      val marginDp = it.value
-      if (!marginDp.startsWith("margin_") || !marginDp.startsWith("@dimen/margin_")) {
+      if (!it.value.startsWith("@dimen/margin_")) {
         context.report(
             ISSUE_XML_MARGIN,
-            context.getLocation(attribute),
+            attribute,
+            context.getValueLocation(attribute),
             "do not use hardcoded margin, use margin from dimen module"
         )
       }
     }
-  }
-
-  override fun appliesTo(folderType: ResourceFolderType): Boolean {
-    return folderType == ResourceFolderType.LAYOUT
   }
 
   companion object {
@@ -51,7 +49,8 @@ class XmlMarginDetector : ResourceXmlDetector() {
         severity = Severity.WARNING,
         implementation = Implementation(
             XmlMarginDetector::class.java,
-            EnumSet.of(Scope.RESOURCE_FILE, Scope.TEST_SOURCES))
+            Scope.RESOURCE_FILE_SCOPE
+        )
     )
   }
 }
