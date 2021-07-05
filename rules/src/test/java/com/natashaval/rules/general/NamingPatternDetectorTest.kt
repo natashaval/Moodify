@@ -21,8 +21,8 @@ class NamingPatternDetectorTest : LintDetectorTest() {
       |class XmlHttpRequest {
       |}
     """.trimMargin())).issues(NamingPatternDetector.ISSUE_NAMING_PATTERN)
-      .run()
-      .expectClean()
+        .run()
+        .expectClean()
   }
 
   @Test
@@ -33,7 +33,7 @@ class NamingPatternDetectorTest : LintDetectorTest() {
       |class XMLHTTPRequest {
       |}
     """.trimMargin())).issues(NamingPatternDetector.ISSUE_NAMING_PATTERN).run()
-      .expect("""
+        .expect("""
       |src/foo/XMLHTTPRequest.java:3: Warning: Class is not named in defined camel case. [NamingPattern]
       |class XMLHTTPRequest {
       |      ~~~~~~~~~~~~~~

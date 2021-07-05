@@ -1,10 +1,8 @@
 package com.natashaval.rules.xml
 
 import com.android.SdkConstants
-import com.android.resources.ResourceFolderType
 import com.android.tools.lint.detector.api.*
 import org.w3c.dom.Attr
-import java.util.*
 
 // https://coderamblings.dev/posts/custom-android-xml-lint-rules-with-kotlin/
 //https://github.com/alexjlockwood/android-lint-checks-demo

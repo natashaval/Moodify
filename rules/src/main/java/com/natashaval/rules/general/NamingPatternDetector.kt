@@ -3,7 +3,6 @@ package com.natashaval.rules.general
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.*
 import org.jetbrains.uast.UClass
-import java.util.*
 
 /**
  * Created by natasha.santoso on 28/06/21.

@@ -9,7 +9,7 @@
         android:id="@+id/iv_mood"
         android:layout_width="@dimen/mood_icon_size"
         android:layout_height="@dimen/mood_icon_size"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8"
         app:srcCompat="@drawable/ic_joy_filled"
         app:layout_constraintEnd_toStartOf="@id/tv_date"
         app:layout_constraintBottom_toBottomOf="parent"

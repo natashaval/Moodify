@@ -43,6 +43,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental true
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -85,5 +89,5 @@ dependencies {
 
     //lint
     lintChecks project(':rules')
-//    implementation project(':lints')
+    implementation project(':lints')
 }

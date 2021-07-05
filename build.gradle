@@ -3,7 +3,7 @@ buildscript {
     ext.kotlin_version = "1.4.10"
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     ext {
         buildConfig = [
@@ -35,7 +35,7 @@ buildscript {
         rxbinding = "4.0.0"
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.0"
+        classpath "com.android.tools.build:gradle:4.2.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_android"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_ui"
@@ -47,7 +47,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 

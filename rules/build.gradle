@@ -1,10 +1,10 @@
 plugins {
+    id 'java-library'
     id 'kotlin'
-    id 'com.android.lint'
 }
 
 ext {
-    lint_version = "27.0.0"
+    lintVersion = "27.2.1"
 }
 
 java {
@@ -14,12 +14,13 @@ java {
 
 dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // Lint
+    compileOnly "com.android.tools.lint:lint-api:$lintVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$lintVersion"
 
-    compileOnly "com.android.tools.lint:lint-api:$lint_version"
-    compileOnly "com.android.tools.lint:lint-checks:$lint_version"
-
-    testImplementation "com.android.tools.lint:lint:$lint_version"
-    testImplementation "com.android.tools.lint:lint-tests:$lint_version"
+    // Lint testing
+    testImplementation "com.android.tools.lint:lint:$lintVersion"
+    testImplementation "com.android.tools.lint:lint-tests:$lintVersion"
     testImplementation "junit:junit:$junit"
 }
 
